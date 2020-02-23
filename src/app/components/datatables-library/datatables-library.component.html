@@ -38,9 +38,13 @@
     </thead>
     
     <tbody>
-      <tr *ngFor="let event of eventReport">
-        <td>{{ event.name }}</td>
-        <td>{{ event.averageScore }}</td>
+      <tr *ngFor="let event of eventReport.eventSummary">
+        <td>{{ event.eventId }}</td>
+        <td>{{ event.beneficiaryName }}</td>
+        <td>{{ event.baseLocation }}</td>
+        <td>{{ event.councilName }}</td>
+        <td>{{ event.project }}</td>
+        <td>{{ event.beneficiaryName }}</td>
       </tr>
     </tbody>
   </table>

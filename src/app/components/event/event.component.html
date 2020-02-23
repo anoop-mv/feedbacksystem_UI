@@ -10,20 +10,20 @@
     <div class="col-md-6">
       <div class="row blueLine rowstyle">
         <div class="col-md-6">ID: {{eventDetails.eventId}}</div>
-        <div class="col-md-6">Date:
+        <div class="col-md-6">Date: {{eventDetails.eventDate | date}}
         
         </div>
       </div>
       <div class="row rowstyle">
         <div class="col-md-12 text-center" style="font-size: 14px;">
-          <b>Discriprion Here</b>
+          <b>{{eventDetails.eventName}}</b>
           <p>
            {{eventDetails.eventDescription}} 
           </p>
         </div>
       </div>
       <div class="row rowstyle" style="background-color:lightgrey">
-        <div class="col-md-6 text-center">Status:{{eventDetails.status}} </div>
+        <div class="col-md-6 text-center">Status: {{eventDetails.status}} </div>
         <div class="col-md-6 text-center">Category: {{eventDetails.catagory}}</div>
       </div>
     </div>
@@ -34,9 +34,9 @@
       </div>
       <div class="row rowstyle">
         <div class="col-md-12 text-center" style="font-size: 14px;">
-          <b>Discriprion Here</b>
+          <b>{{eventDetails.beneficiaryName}}</b>
           <p>
-            {{eventDetails.eventDescription}}
+            {{eventDetails.venueAddress}}
           </p>
         </div>
       </div>

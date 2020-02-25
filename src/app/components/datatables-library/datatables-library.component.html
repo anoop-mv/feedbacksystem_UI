@@ -32,19 +32,19 @@
         <th style="width: 20%">Base Location</th>
         <th style="width: 20%">Council Name</th>
         <th style="width: 20%">Project</th>
-        <th style="width: 20%">Business Unit</th>
+        <!-- <th style="width: 20%">Business Unit</th> -->
         <th style="width: 20%">Rating</th>
       </tr>
     </thead>
     
     <tbody>
-      <tr *ngFor="let event of eventReport.eventSummary">
-        <td>{{ event.eventId }}</td>
-        <td>{{ event.beneficiaryName }}</td>
-        <td>{{ event.baseLocation }}</td>
-        <td>{{ event.councilName }}</td>
-        <td>{{ event.project }}</td>
-        <td>{{ event.beneficiaryName }}</td>
+      <tr *ngFor="let event of eventReports">
+        <td>{{ event.eventSummary.eventId }}</td>
+        <td>{{ event.eventSummary.beneficiaryName }}</td>
+        <td>{{ event.eventSummary.baseLocation }}</td>
+        <td>{{ event.eventSummary.councilName }}</td>
+        <td>{{ event.eventSummary.project }}</td>
+        <td>{{event.eventRating}}</td>
       </tr>
     </tbody>
   </table>

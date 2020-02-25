@@ -12,13 +12,13 @@ import {EventReportResponse } from 'src/app/models/EventReportResponse';
   styleUrls   : ['./datatables-library.component.css']
 })
 export class DatatablesLibraryComponent implements AfterViewInit, OnDestroy, OnInit {
-  eventReport: EventReportResponse;
+  eventReports: EventReportResponse[];
   selectedValue : string = '';
   //eventReport   : EventReport[];
   check         : boolean = true;
   roleLog = localStorage.getItem('role');
 
-  @ViewChild(DataTableDirective)
+  @ViewChild(DataTableDirective, { static: true })
   dtElement: DataTableDirective;
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -56,7 +56,7 @@ export class DatatablesLibraryComponent implements AfterViewInit, OnDestroy, OnI
           this.reportservice.getEventsReport(this.selectedValue, ascid)
           .subscribe(
             data=>{
-              this.eventReport=data;
+              this.eventReports=data;
               this.dtTrigger.next();
             }
           );
@@ -80,8 +80,9 @@ export class DatatablesLibraryComponent implements AfterViewInit, OnDestroy, OnI
     this.reportservice.getEventsReport(this.selectedValue, ascid)
     .subscribe(
       data=>{
-        this.eventReport=data;
-        console.log(""+this.eventReport);
+        this.eventReports=data;
+        //this.dtTrigger.next();
+        console.log(""+this.eventReports);
       }
     );
   }

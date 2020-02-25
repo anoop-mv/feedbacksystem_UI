@@ -1,3 +1,4 @@
 export interface EventReportResponse{
-    eventSummary:any[],
+    eventSummary:any,
+    eventRating:Int16Array
 }    

@@ -11,21 +11,19 @@ import { DatePipe } from '@angular/common';
 })
 export class EventComponent implements OnInit {
   eventLists:EventBeneficiaryResponse[];
-  eventDetails:EventBeneficiaryResponse
 
   constructor(private route: ActivatedRoute,private eventDetailService:EventDetailService,private datePipe: DatePipe) { }
   eid;
 
   ngOnInit() {
     this.eid = this.route.snapshot.paramMap.get("eid");
-    this.eventDetails=this.eventDetailService.getEventDetails(this.eventDetailService.eventLists,this.eid);
-    console.log("cooo"+this.eventDetailService.eventLists);
 
 
-    // this.eventDetailService.getEventBeneficiary(this.eid).subscribe(data => {
-    //         this.eventLists=data ? data['0'] : {};
-    //         console.log(" eventLists ",this.eventLists)
-    //     });
+
+    this.eventDetailService.getEventBeneficiary(this.eid).subscribe(data => {
+            this.eventLists=data ? data['0'] : {};
+            console.log(" eventLists ",this.eventLists)
+        });
         
   }
 

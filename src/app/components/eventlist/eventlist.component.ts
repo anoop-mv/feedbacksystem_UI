@@ -13,7 +13,6 @@ export class EventlistComponent implements OnInit {
 
  // eventLists:Observable<EventDetailResponse[]>;
  eventLists:EventDetailResponse[];
- eventDetails:EventDetailResponse;
 
   constructor(private router: Router,private eventDetailService:EventDetailService) { }
   datalist=[]
@@ -31,7 +30,6 @@ export class EventlistComponent implements OnInit {
         .subscribe(
           data => {
             this.eventLists=data;
-            this.eventDetailService.eventLists=data;
         });
   }
  /* eventDetails(eid){

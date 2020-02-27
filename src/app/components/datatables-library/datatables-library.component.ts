@@ -4,7 +4,7 @@ import { EventReport } from 'src/app/models/EventReport';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import { ReportServiceService } from 'src/app/services/report-service.service';
+import { ReportService } from 'src/app/services/report.service';
 import {EventReportResponse } from 'src/app/models/EventReportResponse';
 @Component({
   selector    : 'app-datatableslibrary',
@@ -18,56 +18,56 @@ export class DatatablesLibraryComponent implements AfterViewInit, OnDestroy, OnI
   check         : boolean = true;
   roleLog = localStorage.getItem('role');
 
-  @ViewChild(DataTableDirective, { static: true })
+  @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private http: HttpClient, private feedbackService: FeedbackService,private reportservice: ReportServiceService) {
+  constructor(private http: HttpClient, private feedbackService: FeedbackService,private reportservice: ReportService) {
   }
 
-  selectChangeHandler(event: any) {
+  // selectChangeHandler(event: any) {
 
-    this.selectedValue = event.target.value;
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      // Destroy the table first
-      dtInstance.destroy();
-      // Call the dtTrigger to rerender again
-    });
+  //   this.selectedValue = event.target.value;
+  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //     // Destroy the table first
+  //     dtInstance.destroy();
+  //     // Call the dtTrigger to rerender again
+  //   });
 
-    var role = localStorage.getItem('role');
-    var ascid = "";
-    if (role == "ROLE_POC")
-      ascid = localStorage.getItem('id');
+  //   var role = localStorage.getItem('role');
+  //   var ascid = "";
+  //   if (role == "ROLE_POC")
+  //     ascid = localStorage.getItem('id');
 
-    /*this.feedbackService.getReport(this.selectedValue, ascid)
-      .subscribe(
-        data => {
-          this.eventReport = data;
-          this.dtTrigger.next();
-        });
-        */
-        // this.feedbackService.getReport(this.selectedValue, ascid)
-        // .subscribe(
-        //   data => {
-        //     this.eventReport = data;
-        //     this.dtTrigger.next();
-        //   });
-          this.reportservice.getEventsReport(this.selectedValue, ascid)
-          .subscribe(
-            data=>{
-              this.eventReports=data;
-              this.dtTrigger.next();
-            }
-          );
-  }
+  //   /*this.feedbackService.getReport(this.selectedValue, ascid)
+  //     .subscribe(
+  //       data => {
+  //         this.eventReport = data;
+  //         this.dtTrigger.next();
+  //       });
+  //       */
+  //       // this.feedbackService.getReport(this.selectedValue, ascid)
+  //       // .subscribe(
+  //       //   data => {
+  //       //     this.eventReport = data;
+  //       //     this.dtTrigger.next();
+  //       //   });
+  //         this.reportservice.getEventsReport(this.selectedValue, ascid)
+  //         .subscribe(
+  //           data=>{
+  //             this.eventReports=data;
+  //             this.dtTrigger.next();
+  //           }
+  //         );
+  // }
 
 
   ngOnInit() {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       processing: true,
       dom       : 'Bfrtip',
       // buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
@@ -81,14 +81,15 @@ export class DatatablesLibraryComponent implements AfterViewInit, OnDestroy, OnI
     .subscribe(
       data=>{
         this.eventReports=data;
+        this.dtTrigger.next(); 
         //this.dtTrigger.next();
-        console.log(""+this.eventReports);
+        // console.log(""+this.eventReports);
       }
     );
   }
 
   ngAfterViewInit(): void {
-    this.dtTrigger.next();
+   // this.dtTrigger.next();
   }
 
   ngOnDestroy(): void {
